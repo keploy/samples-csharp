@@ -1,0 +1,43 @@
+version: api.keploy.io/v1beta1
+kind: Http
+name: test-1
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Host: localhost:5249
+            User-Agent: curl/8.2.1
+        body: ""
+        body_type: ""
+        timestamp: 2023-12-14T11:19:06.885594925Z
+        host: ""
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Thu, 14 Dec 2023 11:19:06 GMT
+            Server: Kestrel
+        body: '[{"id":1,"name":"John Doe","age":25},{"id":2,"name":"Jane Doe","age":30}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 2023-12-14T11:19:08.951513648Z
+    objects: []
+    assertions:
+        noise:
+            body.age: []
+            body.name: []
+            header.Date: []
+    created: 1702552748
+curl: |
+    curl --request GET \
+      --url http://localhost:5249/api/user \
+      --header 'User-Agent: curl/8.2.1' \
+      --header 'Accept: */*' \
+      --header 'Host: localhost:5249' \

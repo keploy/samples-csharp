@@ -1,0 +1,84 @@
+version: api.keploy.io/v1beta1
+name: report-2
+status: PASSED
+success: 1
+failure: 0
+total: 1
+tests:
+    - kind: Http
+      name: report-2
+      status: PASSED
+      started: 1702552773
+      completed: 1702552773
+      test_case_path: /home/sonichigi.linux/simpleAPI_v1/keploy/test-set-1
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Host: localhost:5249
+            User-Agent: curl/8.2.1
+        body: ""
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Thu, 14 Dec 2023 11:19:06 GMT
+            Server: Kestrel
+        body: '[{"id":1,"name":"John Doe","age":25},{"id":2,"name":"Jane Doe","age":30}]'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.age: []
+        body.name: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 14 Dec 2023 11:19:06 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 14 Dec 2023 11:19:32 GMT
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"name":"John Doe","age":25},{"id":2,"name":"Jane Doe","age":30}]'
+              actual: '[{"id":1,"name":"John Doe","age":25},{"id":2,"name":"Jane Doe","age":30}]'
+        dep_result: []
+test_set: test-set-1
