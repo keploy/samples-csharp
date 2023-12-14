@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 public class Startup
 {
     public Startup(IConfiguration configuration)
@@ -15,6 +16,10 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        // Add PostgreSQL database
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
         services.AddControllers();
     }
 

@@ -10,32 +10,33 @@ spec:
         url: http://localhost:5249/api/user
         header:
             Accept: '*/*'
-            Content-Length: "28"
+            Content-Length: "35"
             Content-Type: application/json
             Host: localhost:5249
             User-Agent: curl/8.2.1
-        body: '{"name":"John Doe","age":30}'
+        body: '{"name":"Sarthak Shnygle","age":23}'
         body_type: ""
-        timestamp: 2023-12-14T11:16:01.132464558Z
+        timestamp: 2023-12-14T12:40:54.322398552Z
         host: ""
     resp:
         status_code: 201
         header:
             Content-Type: application/json; charset=utf-8
-            Date: Thu, 14 Dec 2023 11:16:01 GMT
+            Date: Thu, 14 Dec 2023 12:40:53 GMT
             Location: http://localhost:5249/api/User/3
             Server: Kestrel
-        body: '{"id":3,"name":"John Doe","age":30}'
+        body: '{"id":3,"name":"Sarthak Shnygle","age":23}'
         body_type: ""
         status_message: ""
         proto_major: 0
         proto_minor: 0
-        timestamp: 2023-12-14T11:16:03.225209532Z
+        timestamp: 2023-12-14T12:40:56.420456364Z
     objects: []
     assertions:
         noise:
+            body.age: []
             header.Date: []
-    created: 1702552563
+    created: 1702557656
 curl: |-
     curl --request POST \
       --url http://localhost:5249/api/user \
@@ -43,4 +44,4 @@ curl: |-
       --header 'Host: localhost:5249' \
       --header 'User-Agent: curl/8.2.1' \
       --header 'Accept: */*' \
-      --data '{"name":"John Doe","age":30}'
+      --data '{"name":"Sarthak Shnygle","age":23}'

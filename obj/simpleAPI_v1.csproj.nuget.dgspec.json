@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sonichigi.linux/simpleAPI_v1/simpleAPI_v1.csproj": {}
+    "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj": {}
   },
   "projects": {
-    "/home/sonichigi.linux/simpleAPI_v1/simpleAPI_v1.csproj": {
+    "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sonichigi.linux/simpleAPI_v1/simpleAPI_v1.csproj",
+        "projectUniqueName": "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj",
         "projectName": "simpleAPI_v1",
-        "projectPath": "/home/sonichigi.linux/simpleAPI_v1/simpleAPI_v1.csproj",
+        "projectPath": "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj",
         "packagesPath": "/home/sonichigi.linux/.nuget/packages/",
-        "outputPath": "/home/sonichigi.linux/simpleAPI_v1/obj/",
+        "outputPath": "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sonichigi.linux/.nuget/NuGet/NuGet.Config"
@@ -39,6 +39,18 @@
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.23.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.0, )"
             },

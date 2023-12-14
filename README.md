@@ -1,9 +1,18 @@
 # Sample CRUD application
 
-## Installing Keploy
+## Installing
+1. Install Keploy
 ```bash
 curl -O https://raw.githubusercontent.com/keploy/keploy/main/keploy.sh && source keploy.sh
 ```
+
+2. Setup application
+```sh
+git clone https://github.com/keploy/samples-csharp.git
+
+# start the database instance
+docker-compose up
+``` 
 
 ### Running in record mode
 ```bash
@@ -14,7 +23,7 @@ Now, since we have our application up and running, let's perform few cURL reques
 
 1. POST Request :-
 ```sh
-curl -kv -X POST -H "Content-Type: application/json" -d '{"name":"John Doe","age":30}' http://localhost:5249/api/user
+curl -k -X POST -H "Content-Type: application/json" -d '{"name":"Sarthak Shnygle","age":23}' http://localhost:5249/api/user
 ```
 
 2. GET Request :-
