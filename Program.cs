@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-
+namespace UserDataAPI
+{
 class Program
 {
     static void Main(string[] args)
@@ -14,4 +15,5 @@ class Program
             {
                 webBuilder.UseStartup<Startup>();
             });
+}
 }

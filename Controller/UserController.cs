@@ -1,26 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using UserDataAPI;
 
+namespace UserDataAPI
+{
 [Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
-{
-    private static List<User> _users = new List<User>
     {
-        new User { Id = 1, Name = "John Doe", Age = 25 },
-        new User { Id = 2, Name = "Jane Doe", Age = 30 }
-    };
+        private readonly AppDbContext _context;
 
-    [HttpGet]
-    public ActionResult<IEnumerable<User>> Get()
-    {
-        return Ok(_users);
-    }
+        public UserController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> Get()
+        {
+            var users = await _context.Users.ToListAsync();
+            return users;
+        }
+
 
     [HttpGet("{id}")]
-    public ActionResult<User> Get(int id)
+    public async Task<ActionResult<User>> Get(int id)
     {
-        var user = _users.Find(u => u.Id == id);
+        var user = await _context.Users.FindAsync(id);
 
         if (user == null)
         {
@@ -31,49 +40,46 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<User> Post([FromBody] User newUser)
+    public async Task<ActionResult<User>> Post([FromBody] User newUser)
     {
-        newUser.Id = _users.Count + 1;
-        _users.Add(newUser);
+        _context.Users.Add(newUser);
+        await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
     }
 
     [HttpPut("{id}")]
-    public ActionResult Put(int id, [FromBody] User updatedUser)
+    public async Task<ActionResult> Put(int id, [FromBody] User updatedUser)
     {
-        var existingUser = _users.Find(u => u.Id == id);
-
-        if (existingUser == null)
-        {
-            return NotFound();
-        }
-
-        existingUser.Name = updatedUser.Name;
-        existingUser.Age = updatedUser.Age;
-
-        return NoContent();
-    }
-
-    [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
-    {
-        var user = _users.Find(u => u.Id == id);
+        var user = await _context.Users.FindAsync(id);
 
         if (user == null)
         {
             return NotFound();
         }
 
-        _users.Remove(user);
+        user.Name = updatedUser.Name;
+        user.Age = updatedUser.Age;
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var user = await _context.Users.FindAsync(id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
 }
-
-public class User
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public int Age { get; set; }
 }

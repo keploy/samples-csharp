@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+
+namespace UserDataAPI // Replace with the actual namespace of your project
+{
 public class Startup
 {
     public Startup(IConfiguration configuration)
@@ -16,20 +19,36 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        // Add PostgreSQL database
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+        options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
+           .EnableSensitiveDataLogging()
+           .LogTo(Console.WriteLine, LogLevel.Information));
 
         services.AddControllers();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+{
+    try
     {
-        if (env.IsDevelopment())
+        using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            app.UseDeveloperExceptionPage();
-        }
+            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
+            // Check if the table exists
+            if (!dbContext.Database.GetAppliedMigrations().Any())
+            {
+                // Table doesn't exist, create it using a raw SQL query
+                dbContext.Database.ExecuteSqlRaw("CREATE TABLE IF NOT EXISTS Users (Id SERIAL PRIMARY KEY, Name VARCHAR(255), Age INT)");
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        // Handle exceptions, log, or take appropriate actions.
+        // Consider using a more specific exception type, like DbUpdateException, for better error handling.
+        Console.WriteLine($"An error occurred during database initialization: {ex.Message}");
+    }
         app.UseRouting();
 
         app.UseEndpoints(endpoints =>
@@ -37,4 +56,5 @@ public class Startup
             endpoints.MapControllers();
         });
     }
+}
 }
