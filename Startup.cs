@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using UserDataAPI;
 using Npgsql;
 
 namespace UserDataAPI // Replace with the actual namespace of your project
@@ -31,17 +32,20 @@ public class Startup
 {
     try
     {
-        using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-        {
-            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        using (var scope = app.ApplicationServices.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            // Check if the table exists
-            if (!dbContext.Database.GetAppliedMigrations().Any())
+        using (var connection = new NpgsqlConnection(dbContext.Database.GetConnectionString()))
+        {
+            connection.Open();
+
+            using (var command = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS Users (Id SERIAL PRIMARY KEY, Name VARCHAR(255), Age INT)", connection))
             {
-                // Table doesn't exist, create it using a raw SQL query
-                dbContext.Database.ExecuteSqlRaw("CREATE TABLE IF NOT EXISTS Users (Id SERIAL PRIMARY KEY, Name VARCHAR(255), Age INT)");
+                command.ExecuteNonQuery();
             }
         }
+    }
     }
     catch (Exception ex)
     {

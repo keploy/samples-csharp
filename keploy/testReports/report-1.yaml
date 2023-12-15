@@ -1,0 +1,181 @@
+version: api.keploy.io/v1beta1
+name: report-1
+status: PASSED
+success: 2
+failure: 0
+total: 2
+tests:
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1702636370
+      completed: 1702636370
+      test_case_path: /home/sonichigi.linux/simpleAPI_v1/samples-csharp/keploy/test-set-0
+      mock_path: ""
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Content-Length: "37"
+            Content-Type: application/json
+            Host: localhost:5249
+            User-Agent: curl/8.2.1
+        body: '{"age":"23","name":"Sarthak Shnygle"}'
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 201
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Fri, 15 Dec 2023 10:31:57 GMT
+            Location: http://localhost:5249/api/User/3
+            Server: Kestrel
+        body: '{"id":3,"name":"Sarthak Shnygle","age":23}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        body.age: []
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 10:31:57 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 10:32:50 GMT
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/3
+              actual:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/3
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":3,"name":"Sarthak Shnygle","age":23}'
+              actual: '{"id":3,"name":"Sarthak Shnygle","age":23}'
+        dep_result: []
+    - kind: Http
+      name: report-1
+      status: PASSED
+      started: 1702636370
+      completed: 1702636370
+      test_case_path: /home/sonichigi.linux/simpleAPI_v1/samples-csharp/keploy/test-set-0
+      mock_path: ""
+      test_case_id: test-2
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Content-Length: "36"
+            Content-Type: application/json
+            Host: localhost:5249
+            User-Agent: curl/8.2.1
+        body: '{"age":"3","name":"Sarthak Shnygle"}'
+        body_type: ""
+        timestamp: 0001-01-01T00:00:00Z
+        host: ""
+      resp:
+        status_code: 201
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Fri, 15 Dec 2023 10:32:24 GMT
+            Location: http://localhost:5249/api/User/4
+            Server: Kestrel
+        body: '{"id":4,"name":"Sarthak Shnygle","age":3}'
+        body_type: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 10:32:24 GMT
+              actual:
+                key: Date
+                value:
+                    - Fri, 15 Dec 2023 10:32:50 GMT
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/4
+              actual:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/4
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":4,"name":"Sarthak Shnygle","age":3}'
+              actual: '{"id":4,"name":"Sarthak Shnygle","age":3}'
+        dep_result: []
+test_set: test-set-0
