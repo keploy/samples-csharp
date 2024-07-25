@@ -1,43 +1,38 @@
 version: api.keploy.io/v1beta1
 kind: Http
-name: test-1
+name: test-5
 spec:
     metadata: {}
     req:
-        method: POST
+        method: GET
         proto_major: 1
         proto_minor: 1
         url: http://localhost:5249/api/user
         header:
             Accept: '*/*'
-            Content-Length: "35"
-            Content-Type: application/json
             Host: localhost:5249
             User-Agent: curl/7.88.1
-        body: '{"name":"Sarthak Shnygle","age":23}'
-        timestamp: 2024-07-25T11:47:05.07166031+05:30
+        body: ""
+        timestamp: 2024-07-25T11:47:38.419030661+05:30
     resp:
-        status_code: 201
+        status_code: 200
         header:
             Content-Type: application/json; charset=utf-8
-            Date: Thu, 25 Jul 2024 06:17:05 GMT
-            Location: http://localhost:5249/api/User/2
+            Date: Thu, 25 Jul 2024 06:17:38 GMT
             Server: Kestrel
-        body: '{"id":2,"name":"Sarthak Shnygle","age":23}'
-        status_message: Created
+        body: '[{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+        status_message: OK
         proto_major: 0
         proto_minor: 0
-        timestamp: 2024-07-25T11:47:07.385152359+05:30
+        timestamp: 2024-07-25T11:47:40.521291928+05:30
     objects: []
     assertions:
         noise:
             header.Date: []
-    created: 1721888227
-curl: |-
-    curl --request POST \
+    created: 1721888260
+curl: |
+    curl --request GET \
       --url http://localhost:5249/api/user \
       --header 'Accept: */*' \
-      --header 'Content-Type: application/json' \
       --header 'Host: localhost:5249' \
       --header 'User-Agent: curl/7.88.1' \
-      --data '{"name":"Sarthak Shnygle","age":23}'

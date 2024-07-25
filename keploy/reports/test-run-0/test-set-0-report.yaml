@@ -1,0 +1,378 @@
+version: api.keploy.io/v1beta1
+name: test-set-0-report
+status: PASSED
+success: 5
+failure: 0
+ignored: 0
+total: 5
+tests:
+    - kind: Http
+      name: test-set-0
+      status: PASSED
+      started: 1721888285
+      completed: 1721888285
+      test_case_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0
+      mock_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0/mocks
+      test_case_id: test-1
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Content-Length: "35"
+            Content-Type: application/json
+            Host: localhost:5249
+            User-Agent: curl/7.88.1
+        body: '{"name":"Sarthak Shnygle","age":23}'
+        timestamp: 2024-07-25T11:47:05.07166031+05:30
+      resp:
+        status_code: 201
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Thu, 25 Jul 2024 06:18:05 GMT
+            Location: http://localhost:5249/api/User/2
+            Server: Kestrel
+        body: '{"id":2,"name":"Sarthak Shnygle","age":23}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:17:05 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:18:05 GMT
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/2
+              actual:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/2
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":2,"name":"Sarthak Shnygle","age":23}'
+              actual: '{"id":2,"name":"Sarthak Shnygle","age":23}'
+        dep_result: []
+    - kind: Http
+      name: test-set-0
+      status: PASSED
+      started: 1721888285
+      completed: 1721888285
+      test_case_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0
+      mock_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0/mocks
+      test_case_id: test-2
+      req:
+        method: POST
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Content-Length: "32"
+            Content-Type: application/json
+            Host: localhost:5249
+            User-Agent: curl/7.88.1
+        body: '{"name":"Gourav Kumar","age":24}'
+        timestamp: 2024-07-25T11:47:20.505724628+05:30
+      resp:
+        status_code: 201
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Thu, 25 Jul 2024 06:18:05 GMT
+            Location: http://localhost:5249/api/User/3
+            Server: Kestrel
+        body: '{"id":3,"name":"Gourav Kumar","age":24}'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 201
+            actual: 201
+        headers_result:
+            - normal: true
+              expected:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/3
+              actual:
+                key: Location
+                value:
+                    - http://localhost:5249/api/User/3
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:17:20 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:18:05 GMT
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '{"id":3,"name":"Gourav Kumar","age":24}'
+              actual: '{"id":3,"name":"Gourav Kumar","age":24}'
+        dep_result: []
+    - kind: Http
+      name: test-set-0
+      status: PASSED
+      started: 1721888285
+      completed: 1721888285
+      test_case_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0
+      mock_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0/mocks
+      test_case_id: test-3
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Host: localhost:5249
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-07-25T11:47:28.989855207+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Thu, 25 Jul 2024 06:18:05 GMT
+            Server: Kestrel
+        body: '[{"id":1,"name":"Sarthak Shnygle","age":23},{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:17:29 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:18:05 GMT
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":1,"name":"Sarthak Shnygle","age":23},{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+              actual: '[{"id":1,"name":"Sarthak Shnygle","age":23},{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+        dep_result: []
+    - kind: Http
+      name: test-set-0
+      status: PASSED
+      started: 1721888285
+      completed: 1721888285
+      test_case_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0
+      mock_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0/mocks
+      test_case_id: test-4
+      req:
+        method: DELETE
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user/1
+        header:
+            Accept: '*/*'
+            Host: localhost:5249
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-07-25T11:47:34.955083872+05:30
+      resp:
+        status_code: 204
+        header:
+            Date: Thu, 25 Jul 2024 06:18:05 GMT
+            Server: Kestrel
+        body: ""
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 204
+            actual: 204
+        headers_result:
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:17:34 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:18:05 GMT
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+        body_result:
+            - normal: true
+              type: PLAIN
+              expected: ""
+              actual: ""
+        dep_result: []
+    - kind: Http
+      name: test-set-0
+      status: PASSED
+      started: 1721888285
+      completed: 1721888285
+      test_case_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0
+      mock_path: /home/sonichigo.linux/samples-csharp/keploy/test-set-0/mocks
+      test_case_id: test-5
+      req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: http://localhost:5249/api/user
+        header:
+            Accept: '*/*'
+            Host: localhost:5249
+            User-Agent: curl/7.88.1
+        body: ""
+        timestamp: 2024-07-25T11:47:38.419030661+05:30
+      resp:
+        status_code: 200
+        header:
+            Content-Type: application/json; charset=utf-8
+            Date: Thu, 25 Jul 2024 06:18:05 GMT
+            Server: Kestrel
+        body: '[{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+        status_message: ""
+        proto_major: 0
+        proto_minor: 0
+        timestamp: 0001-01-01T00:00:00Z
+      noise:
+        header.Date: []
+      result:
+        status_code:
+            normal: true
+            expected: 200
+            actual: 200
+        headers_result:
+            - normal: true
+              expected:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+              actual:
+                key: Content-Type
+                value:
+                    - application/json; charset=utf-8
+            - normal: true
+              expected:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:17:38 GMT
+              actual:
+                key: Date
+                value:
+                    - Thu, 25 Jul 2024 06:18:05 GMT
+            - normal: true
+              expected:
+                key: Server
+                value:
+                    - Kestrel
+              actual:
+                key: Server
+                value:
+                    - Kestrel
+        body_result:
+            - normal: true
+              type: JSON
+              expected: '[{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+              actual: '[{"id":2,"name":"Sarthak Shnygle","age":23},{"id":3,"name":"Gourav Kumar","age":24}]'
+        dep_result: []
+test_set: test-set-0

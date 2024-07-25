@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj": {}
+    "/home/sonichigo.linux/samples-csharp/simpleAPI_v1.csproj": {}
   },
   "projects": {
-    "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj": {
+    "/home/sonichigo.linux/samples-csharp/simpleAPI_v1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj",
+        "projectUniqueName": "/home/sonichigo.linux/samples-csharp/simpleAPI_v1.csproj",
         "projectName": "simpleAPI_v1",
-        "projectPath": "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/simpleAPI_v1.csproj",
-        "packagesPath": "/home/sonichigi.linux/.nuget/packages/",
-        "outputPath": "/home/sonichigi.linux/simpleAPI_v1/samples-csharp/obj/",
+        "projectPath": "/home/sonichigo.linux/samples-csharp/simpleAPI_v1.csproj",
+        "packagesPath": "/home/sonichigo.linux/.nuget/packages/",
+        "outputPath": "/home/sonichigo.linux/samples-csharp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/sonichigi.linux/.nuget/NuGet/NuGet.Config"
+          "/home/sonichigo.linux/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -84,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/sonichigi.linux/.dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/sonichigo.linux/.dotnet/sdk/8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
