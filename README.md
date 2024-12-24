@@ -1,83 +1,37 @@
-# Sample CRUD application
+<h1 align="center"> Keploy C# Samples Apps </h1>
+<p align="center">
 
-This is a sample C# application that demonstrates the usage of Keploy with .Net and PostgreSQl.
+  <a href="CODE_OF_CONDUCT.md" alt="Contributions welcome">
+    <img src="https://img.shields.io/badge/Contributions-Welcome-brightgreen?logo=github" /></a>
+    
+  <a href="https://join.slack.com/t/keploy/shared_invite/zt-12rfbvc01-o54cOG0X1G6eVJTuI_orSA" alt="Slack">
+    <img src=".github/slack.svg" /></a>
+    
+  <a href="https://opensource.org/licenses/Apache-2.0" alt="License">
+    <img src=".github/License-Apache_2.0-blue.svg" /></a>
 
-## Get Started with Keploy
-1. Install Keploy
-```bash
-curl -O -L https://keploy.io/install.sh && source install.sh
-```
+>**Note** :- Issue Creation is disabled on this Repository, please visit [here](https://github.com/keploy/keploy/issues/new/choose) to submit Issue.
 
-2. Setup application
-```sh
-git clone https://github.com/keploy/samples-csharp.git
+# Keploy C# Samples
+This repo contains the sample for [Keploy's](https://keploy.io)🐰 with C#. Please feel free to contribute if you'd like submit a sample for another use-case or library.
 
-# start the database instance
-docker-compose up
-``` 
 
-## Pre-requsites
+## C# Sample Apps with Keploy
+1. [Crud-App](https://github.com/keploy/samples-csharp/tree/main/crud-app)
+ 
+## Community Support ❤️
 
-Install `.Net EF` core library : 
+### 🤔 Questions?
+Reach out to us. We're here to help!
 
-```sh
-dotnet tool install --global dotnet-ef
-```
-Once dotnet-ef is installed, ensure that PATH is updated : 
-```sh
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
-export PATH="$PATH:$HOME/.dotnet/tools"
+[![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/keploy/shared_invite/zt-12rfbvc01-o54cOG0X1G6eVJTuI_orSA)
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/keploy/)
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://www.youtube.com/channel/UC6OTg7F4o0WkmNtSoob34lg)
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/Keployio)
 
-## Verify installation
+### 💖 Let's Build Together!
+Whether you're a newbie coder or a wizard 🧙‍♀️, your perspective is golden. Take a peek at our:
 
-dotnet ef --version
-```
+📜 [Contribution Guidelines](https://github.com/keploy/keploy/blob/main/CONTRIBUTING.md)
 
-Check that your DbContext and entity configurations are correct, and run the following commands:
-
-```sh
-dotnet ef migrations add InitialMigration
-dotnet ef database update
-```
-We need to run the migration command before starting our application.
-
-### Running in record mode
-```bash
-keploy record -c "dotnet run"
-```
-
-Now, since we have our application up and running, let's perform few cURL requests :-
-
-1. POST Requests :-
-```sh
-curl -k -X POST -H "Content-Type: application/json" -d '{"name":"Sarthak Shnygle","age":23}' http://localhost:5249/api/user
-
-curl -k -X POST -H "Content-Type: application/json" -d '{"name":"Gourav Kumar","age":22}' http://localhost:5249/api/user
-```
-
-2. GET Request :-
-```sh
-curl -k http://localhost:5249/api/user
-```
-
-3. DELETE Request :-
-```sh
-curl -k -X DELETE http://localhost:5249/api/user/1
-```
-
-and voila, we have our testcases generated.
-
-![Testcases](./img/testcases.png)
-
-### Run the test cases
-
-Now let's run the keploy in test mode : 
-
-```sh
-keploy test -c "dotnet run"
-```
-
-We can see that we have got our test-report generated and present in `Keploy/reports` under Keploy folder.
-
-![Testrun](./img/testrun.png)
+❤️ [Code of Conduct](https://github.com/keploy/keploy/blob/main/CODE_OF_CONDUCT.md)
