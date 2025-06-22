@@ -1,0 +1,40 @@
+# .NET Core and Visual Studio generated files
+
+## Build output folders
+[Bb]in/
+[Oo]bj/
+
+## IDE-specific files (Visual Studio, VS Code, Rider)
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Configuration files that might contain secrets
+# Usually appsettings.json is checked in, but developer-specific overrides are not.
+appsettings.*.json
+!appsettings.Template.json
+
+# User-secrets files (a common pattern for local secrets)
+secrets.json
+
+## Log files
+*.log
+logs/
+
+## Runtime files
+*.exe
+*.dll
+*.pdb
+
+## Miscellaneous
+*.DS_Store
+Thumbs.db
+
+# NuGet packages folder (legacy pattern, but good to have)
+[Pp]ackages/
+
+# Test results
+[Tt]est[Rr]esult*/
