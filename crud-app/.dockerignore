@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+keploy/
+img/
+*.md
+docker-compose.yml
+.gitignore
+dotnet-install.sh
