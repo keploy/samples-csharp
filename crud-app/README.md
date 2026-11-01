@@ -5,7 +5,7 @@ This is a sample C# application that demonstrates the usage of Keploy with .Net 
 ## Get Started with Keploy
 1. Install Keploy
 ```bash
-curl -O -L https://keploy.io/install.sh && source install.sh
+source /dev/stdin <<<"$(curl -fsSL https://keploy.io/install.sh || echo 'echo Keploy installer download failed >&2; return 1')"
 ```
 
 2. Setup application
