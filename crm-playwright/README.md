@@ -23,6 +23,8 @@ A small CRM shaped like many line-of-business apps: an ASP.NET Core 8 backend on
 
 The suite makes its own data the way real suites do: every lead's name and email carry the time and a random suffix, and the backend stamps ids (`Guid.NewGuid()`) and times (`DateTime.UtcNow`) of its own.
 
+To compare, `CRM_FIXED_DATA=1` in the environment of `keploy mock record` and `keploy mock replay` pins the suite's data: each test makes the same name, email and phone on every run, from its own title. The backend's ids and times still change.
+
 ## What you need
 
 - .NET 8 SDK, Node.js 22 or later, Docker with Compose, `openssl`, `curl`.
