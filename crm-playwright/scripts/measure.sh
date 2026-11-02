@@ -4,7 +4,8 @@
 # installed, the providers' CA trusted, keploy installed).
 #   measure.sh [N]         record, then N replays (default 10)
 #   measure.sh record      deps up, KEPLOY_PROVEN=1 keploy mock record --local, deps down, each port checked closed
-#   measure.sh replay [N]  N replays of the recording in keploy/ (KEPLOY_PROVEN=1 keploy mock replay --local)
+#   measure.sh replay [N]  each port checked closed and no dependency container left, then N replays of the
+#                          recording in keploy/ (KEPLOY_PROVEN=1 keploy mock replay --local)
 #   measure.sh check LOG.. the replay checks on saved replay logs
 # Exit 0 only when record and every replay exit 0 and each replay's own count line
 # ("N test(s) ran: P passed, F failed ...; Q quarantined") counts no failed test, at least MIN_COMPARED passed
@@ -65,22 +66,28 @@ record() {
     return
   fi
   log "deps up"
-  local rc=0 ids p
+  local rc=0
   keploy_run record "${RECORD_FLAGS:-}" >"$OUT/record.log" 2>&1 || rc=$?
   log "record exit $rc ($OUT/record.log)"
   [ "$rc" = 0 ] || fail "record exit $rc"
   sh scripts/deps.sh down >"$OUT/deps-down.log" 2>&1 || fail "deps down ($OUT/deps-down.log)"
   trap - INT TERM
-  # Every dependency gone: none of the sample's containers, and nothing answers on its port.
+  deps_gone "after deps down"
+}
+
+# deps_gone WHEN: every dependency gone: none of the sample's containers, and nothing answers on its port
+# (DynamoDB 8000, SQS 9324, Pulsar 6650 and 8080, the payments provider 8443, the LMS 9443).
+deps_gone() {
+  local ids p before=$FAILS
   if ! ids=$(docker compose ps -aq); then
-    fail "docker compose ps failed after deps down"
+    fail "docker compose ps failed $1"
   elif [ -n "$ids" ]; then
-    fail "containers still there after deps down: $(docker compose ps -a --format '{{.Name}}' | tr '\n' ' ')"
+    fail "containers still there $1: $(docker compose ps -a --format '{{.Name}}' | tr '\n' ' ')"
   fi
   for p in 8000 9324 6650 8080 8443 9443; do
-    ! (exec 3<>"/dev/tcp/127.0.0.1/$p") 2>/dev/null || fail "port $p still answers after deps down"
+    ! (exec 3<>"/dev/tcp/127.0.0.1/$p") 2>/dev/null || fail "port $p still answers $1"
   done
-  log "deps down: no container; 8000 9324 6650 8080 8443 9443 closed"
+  [ "$FAILS" != "$before" ] || log "no dependency left $1: no container; 8000 9324 6650 8080 8443 9443 closed"
 }
 
 # check NAME LOG: keploy's own count line of one replay, e.g. "keploy: crm-playwright: 1 test(s) ran: 1 passed,
@@ -131,7 +138,9 @@ record)
   verdict "record"
   ;;
 replay)
-  replay "$n"
+  # A replay with a dependency up proves nothing about replaying without it.
+  deps_gone "before the replays"
+  [ -n "$FAILS" ] || replay "$n"
   verdict "$n replays"
   ;;
 check)
