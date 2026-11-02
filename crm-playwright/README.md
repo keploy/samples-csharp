@@ -18,7 +18,7 @@ A small CRM shaped like many line-of-business apps: an ASP.NET Core 8 backend on
 | `e2e/` | The Playwright suite: `pages/` (page objects), `tests/`, `fixtures.ts` (the page objects on `@keploy/playwright`'s `test`) |
 | `providers/server.mjs` | Two fake third parties (payments, LMS) over HTTPS, for record |
 | `docker-compose.yml` | DynamoDB local, ElasticMQ (SQS) and Pulsar standalone, for record |
-| `scripts/` | `gen-certs.sh` and `trust-ca.sh` (the providers' test CA), `deps.sh up|down` |
+| `scripts/` | `gen-certs.sh` and `trust-ca.sh` (the providers' test CA), `deps.sh up|down`, `measure.sh` (record once, replay N times, check each replay) |
 | `keploy.yml` | The suite as keploy's command, recordings kept locally (`mock.local`) |
 
 The suite makes its own data the way real suites do: every lead's name and email carry the time and a random suffix, and the backend stamps ids (`Guid.NewGuid()`) and times (`DateTime.UtcNow`) of its own.
@@ -59,6 +59,8 @@ KEPLOY_PROVEN=1 keploy mock replay --local
 ```
 
 `KEPLOY_PROVEN=1` turns on keploy's proven model: record runs each test again against its recording before it keeps it, and replay compares only the tests record kept. `--local` keeps the recordings in `keploy/` on this machine and runs without a Keploy sign-in. keploy 3.8.106 still asks for a sign-in when only `keploy.yml` sets `mock.local`, so pass the flag.
+
+To measure the replay, `bash scripts/measure.sh 10` does the four steps above, with 10 replays. It exits 0 only when record and every replay exit 0 and each replay's own count line (`N test(s) ran: P passed, F failed ...; Q quarantined`) counts no failed test, at least one passed test, and the same counts as the first replay. `EXPECT_COUNTS=ran/passed/failed/quarantined` also pins the counts. Today it passes with 1 test compared and 6 quarantined (see below): `MIN_COMPARED=N` sets how many tests a run must compare to pass. The logs go to `measure-out/`; the last line says `MEASURE: PASS` or `MEASURE: FAIL`. `bash scripts/measure.sh record` and `bash scripts/measure.sh replay N` run the two halves.
 
 The suite runs with one worker and no retries (`keploy.yml`): keploy serves one test at a time, and sets aside, with its reason, a test it cannot prove instead of retrying it.
 

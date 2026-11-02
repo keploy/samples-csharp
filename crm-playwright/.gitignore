@@ -5,3 +5,4 @@ app/out/
 providers.log
 providers.pid
 .keploy-run/
+measure-out/
