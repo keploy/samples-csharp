@@ -1,0 +1,14 @@
+{
+  "name": "crm-playwright-e2e",
+  "private": true,
+  "description": "Playwright UI suite (Page Object Model) for the CRM lead sample, run under keploy mock record and replay.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@keploy/playwright": "0.1.1",
+    "@playwright/test": "1.62.1",
+    "@types/node": "22.19.1",
+    "typescript": "5.9.3"
+  }
+}

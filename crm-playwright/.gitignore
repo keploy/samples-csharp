@@ -1,0 +1,6 @@
+app/bin/
+app/obj/
+app/out/
+.certs/
+providers.log
+providers.pid
