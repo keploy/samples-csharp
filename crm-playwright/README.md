@@ -45,6 +45,8 @@ sh scripts/deps.sh down
 
 Playwright starts the app itself (`webServer` in `e2e/playwright.config.ts`) on `http://127.0.0.1:5080`.
 
+The test CA and the providers' certificate are valid for 30 days. `deps.sh up` starts nothing when the certificate is missing, out of date or not trusted on this machine; it says so and names the two commands to run again (`gen-certs.sh`, then `trust-ca.sh`).
+
 ## Record and replay with keploy
 
 Install keploy (enterprise), then, from `crm-playwright/`:
