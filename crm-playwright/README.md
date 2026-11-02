@@ -8,7 +8,7 @@ A small CRM shaped like many line-of-business apps: an ASP.NET Core 8 backend on
 - a payment provider over HTTPS (`POST /v1/charges`);
 - an LMS over HTTPS (`POST /api/v2/enrollments`).
 
-`keploy mock record` runs the suite against these dependencies and records every call the app makes. `keploy mock replay` runs the same suite with every dependency stopped: keploy answers the app's calls from the recording.
+`keploy mock record` runs the suite against these dependencies and records every call the app makes. It then runs each test again against its recording, keeps the tests it can prove, and sets the others aside with a reason. `keploy mock replay` runs the kept tests with every dependency stopped: keploy answers the app's calls from the recording. What that gives today is under [What record and replay give today](#what-record-and-replay-give-today).
 
 ## Layout
 
@@ -37,7 +37,7 @@ cd crm-playwright
 dotnet publish app/CrmLeads.csproj -c Release -o app/out
 sh scripts/gen-certs.sh .certs
 sudo sh scripts/trust-ca.sh .certs/ca.pem    # the providers' test CA, as a real provider's CA is trusted
-(cd e2e && npm ci && npx playwright install chromium)
+(cd e2e && npm ci && npx playwright install --with-deps chromium)
 sh scripts/deps.sh up                        # dependencies, providers, the table and the queue
 (cd e2e && npx playwright test)
 sh scripts/deps.sh down
@@ -56,6 +56,15 @@ sh scripts/deps.sh down                      # every dependency and provider sto
 KEPLOY_PROVEN=1 keploy mock replay --local
 ```
 
-`--local` keeps the recordings in `keploy/` on this machine and runs without a Keploy sign-in. keploy 3.8.106 still asks for a sign-in when only `keploy.yml` sets `mock.local`, so pass the flag.
+`KEPLOY_PROVEN=1` turns on keploy's proven model: record runs each test again against its recording before it keeps it, and replay compares only the tests record kept. `--local` keeps the recordings in `keploy/` on this machine and runs without a Keploy sign-in. keploy 3.8.106 still asks for a sign-in when only `keploy.yml` sets `mock.local`, so pass the flag.
 
 The suite runs with one worker and no retries (`keploy.yml`): keploy serves one test at a time, and sets aside, with its reason, a test it cannot prove instead of retrying it.
+
+## What record and replay give today
+
+With keploy 3.8.106, record keeps 1 of the 7 tests: `refuses a lead without an email`, which makes no call to any dependency. It sets the other 6 aside as flaky (`request_changed`), and `keploy/crm-playwright/verdicts.yaml` names each one and its reason:
+
+- Their DynamoDB calls carry values that change on every run: the lead ids and times the app makes, and the names and emails the suite makes. Pinning the suite's data with `CRM_FIXED_DATA=1` keeps no more tests.
+- keploy refuses each changed call it cannot explain instead of guessing. Most of these values also travel in the app's Pulsar messages, and keploy cannot yet follow a value through a Pulsar message.
+
+`keploy mock replay` then runs that one test, which passes, and skips the 6. Its receipt says the replay did not prove the tests run with the dependencies off. So today this sample shows the record and replay flow on a .NET app with these dependencies; it does not yet show these dependencies replayed inside a test.
