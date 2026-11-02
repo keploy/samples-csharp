@@ -4,3 +4,4 @@ app/out/
 .certs/
 providers.log
 providers.pid
+.keploy-run/

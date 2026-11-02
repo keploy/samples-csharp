@@ -49,9 +49,11 @@ Install keploy (enterprise), then, from `crm-playwright/`:
 
 ```sh
 sh scripts/deps.sh up
-KEPLOY_PROVEN=1 keploy mock record
+KEPLOY_PROVEN=1 keploy mock record --local
 sh scripts/deps.sh down                      # every dependency and provider stopped
-KEPLOY_PROVEN=1 keploy mock replay
+KEPLOY_PROVEN=1 keploy mock replay --local
 ```
+
+`--local` keeps the recordings in `keploy/` on this machine and runs without a Keploy sign-in. keploy 3.8.106 still asks for a sign-in when only `keploy.yml` sets `mock.local`, so pass the flag.
 
 The suite runs with one worker and no retries (`keploy.yml`): keploy serves one test at a time, and sets aside, with its reason, a test it cannot prove instead of retrying it.
