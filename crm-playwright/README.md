@@ -69,6 +69,6 @@ The suite runs with one worker and no retries (`keploy.yml`): keploy serves one 
 With keploy 3.8.106, record keeps 1 of the 7 tests: `refuses a lead without an email`, which makes no call to any dependency. It sets the other 6 aside as flaky (`request_changed`), and `keploy/crm-playwright/verdicts.yaml` names each one and its reason:
 
 - Their DynamoDB calls carry values that change on every run: the lead ids and times the app makes, and the names and emails the suite makes. Pinning the suite's data with `CRM_FIXED_DATA=1` keeps no more tests.
-- keploy refuses each changed call it cannot explain instead of guessing. Most of these values also travel in the app's Pulsar messages, and keploy cannot yet follow a value through a Pulsar message.
+- keploy refuses each changed call it cannot explain instead of guessing. It cannot yet explain two places these values reach: the AWS SDK signs every DynamoDB request over them (the `Authorization` header), and the SQS message each new lead sends carries them. keploy 3.8.106 also cannot follow them through the app's Pulsar messages. Following them through Pulsar alone keeps no more tests: the first two places still set the 6 aside.
 
 `keploy mock replay` then runs that one test, which passes, and skips the 6. Its receipt says the replay did not prove the tests run with the dependencies off. So today this sample shows the record and replay flow on a .NET app with these dependencies; it does not yet show these dependencies replayed inside a test.
