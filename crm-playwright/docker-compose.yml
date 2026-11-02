@@ -1,0 +1,21 @@
+# The dependencies the app records against. At replay they are all stopped:
+# keploy answers the app's calls to them from the recording.
+services:
+  dynamodb:
+    image: amazon/dynamodb-local:2.5.2
+    command: ["-jar", "DynamoDBLocal.jar", "-inMemory", "-sharedDb"]
+    ports: ["127.0.0.1:8000:8000"]
+  sqs:
+    image: softwaremill/elasticmq-native:1.6.9
+    ports: ["127.0.0.1:9324:9324"]
+  pulsar:
+    image: apachepulsar/pulsar:3.3.2
+    command: ["bin/pulsar", "standalone", "--no-functions-worker", "--no-stream-storage"]
+    environment:
+      PULSAR_MEM: "-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m"
+    ports: ["127.0.0.1:6650:6650", "127.0.0.1:8080:8080"]
+    healthcheck:
+      test: ["CMD", "bin/pulsar-admin", "brokers", "healthcheck"]
+      interval: 5s
+      timeout: 30s
+      retries: 60

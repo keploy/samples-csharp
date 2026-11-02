@@ -1,0 +1,8 @@
+app/bin/
+app/obj/
+app/out/
+.certs/
+providers.log
+providers.pid
+.keploy-run/
+measure-out/

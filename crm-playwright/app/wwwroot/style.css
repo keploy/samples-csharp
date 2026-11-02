@@ -1,0 +1,10 @@
+body { font-family: system-ui, sans-serif; margin: 0; }
+header { background: #1f3a5f; padding: 12px 24px; }
+header a { color: #fff; text-decoration: none; font-weight: 600; }
+main { padding: 24px; max-width: 900px; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+label { display: block; margin: 8px 0 2px; }
+.row { display: flex; gap: 8px; margin: 4px 0; }
+.error { color: #b00020; }
+.card { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 12px 0; }

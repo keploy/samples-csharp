@@ -1,0 +1,11 @@
+# keploy mock record / keploy mock replay for this sample (enterprise keploy,
+# KEPLOY_PROVEN=1). The command is the Playwright suite; Playwright starts the
+# app (e2e/playwright.config.ts webServer), so the app runs inside it.
+# local: true keeps the recordings in keploy/ next to this file instead of
+# Keploy Cloud.
+mock:
+  name: crm-playwright
+  local: true
+  # One worker and no retries: keploy serves one test at a time and sets
+  # aside, with its reason, a test it cannot prove.
+  command: cd e2e && exec npx playwright test --workers=1 --retries=0
